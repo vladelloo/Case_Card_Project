@@ -1,0 +1,30 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+<div class="container text-center">
+<h1> QR generator </h1>
+<form action="{%  url 'qr_code' %}">
+    <select name="open key">
+       <option value='tx1, tx2'> 2 </option>
+       <option value='tx1, tx2, tx3, tx4' selected="selected"> 4 </option>
+       <option value='tx1, tx2, tx3, tx4, tx5, tx6'> 6 </option>
+    </select> Открытый ключ
+    <br>
+    <input type="checkbox" name="tourniquet"> Жгут
+    <br>
+    <input type="checkbox" name="anesthesia"> Обезболивание
+    <br>
+    <input type="checkbox" name="antibiotic"> Антибиотик
+    <br>
+    <input type="checkbox" name="tranexamic acid"> Транексамовая кислота
+    <br>
+    <input type="checkbox" name="antiemetic"> Противорвотное
+    <br>
+    <input type="checkbox" name="immobilization"> Иммобилизация
+    <br>
+    <input type="submit" value="Сгенирировать QR code" class="btn btn-primary">
+</form>
+
+<form action="{%  url 'magazine' %}">
+    <input type="submit" value="База QR кодов">
+</form>
+</div>
