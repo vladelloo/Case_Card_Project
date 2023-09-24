@@ -1,13 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 import hashlib
+
 # Create your views here.
-qr_list_base = []
 
 def home(request):
     return render(request, 'qr_generator/home.html')
 
-def qr_code(request, base=qr_list_base):
+def qr_code(request):
 
     open_key = list(request.GET.get('open key'))
 
@@ -36,9 +36,4 @@ def qr_code(request, base=qr_list_base):
 
     qrcode = hashlib.sha256((hash_dabl).encode()).hexdigest()
 
-    base.append(str(qrcode))
-
     return render(request, 'qr_generator/qr_code.html', {'qrcode': qrcode})
-
-def magazine(request):
-    return render(request, 'qr_magazine/magazine.html', {'base': qr_list_base})
