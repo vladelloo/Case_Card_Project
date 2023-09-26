@@ -1,0 +1,161 @@
+{% extends './base.html' %}
+
+{% block content %}
+
+{% load static %}
+<div class="container">
+  <main>
+   <div class="py-5 text-center">
+      <img class="d-block mx-auto mb-4" src="{% static 'qr_generator/20230922132819.jpg' %}" alt="" width="72" height="57">
+      <h2>Электронная карта</h2>
+      <p class="lead">Эта форма создана для регистрации пациентов, передачи информации между этапами оказания помощи, а также для учета потерь в условиях боевых действий, чрезвычайных ситуаций и катастроф.</p>
+   </div>
+
+    <div class="col-lg-8 mx-auto p-4 py-md-5">
+        <h4 class="mb-3">Информация о пациенте</h4>
+        <form action="{%  url 'qr_code' %}">
+          <div class="row g-3">
+
+              <div class="col-sm-6">
+                <label for="firstName" class="form-label">Фамилия, имя, отчество</label>
+                <input type="text" class="form-control" id="firstName" name="firstName" placeholder="" value="" required>
+              </div>
+
+              <div class="col-sm-6">
+                <label for="nickname" class="form-label">Позывной</label>
+                <input type="text" class="form-control" id="nickname" name="nickname" placeholder="">
+              </div>
+
+              <div class="col-md-5">
+                <label for="birthday" class="form-label">Дата рождения</label>
+                <input type="text" class="form-control" id="birthday" name="birthday" placeholder="дд/мм/гггг" value="">
+              </div>
+
+              <div class="col-md-4">
+                <label for="personalNumber" class="form-label">Личный номер</label>
+                <input type="text" class="form-control" id="personalNumber" name="personalNumber" placeholder="АБ-123456" value="">
+              </div>
+
+              <div class="col-md-3">
+                <label for="subdivision" class="form-label">Подразделение</label>
+                <div class="input-group has-validation">
+                  <span class="input-group-text">в/ч</span>
+                  <input type="text" class="form-control" id="subdivision" name="subdivision" placeholder="55599" required>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <label for="diagnosis" class="form-label">Диагноз <span class="text-body-secondary">(обязательно для заполнения)</span></label>
+                <input type="text" class="form-control" id="diagnosis" name="diagnosis" placeholder="" value="" required>
+              </div>
+
+              <hr class="my-4">
+
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="tourniquet" name="tourniquet">
+                <label class="form-check-label" for="tourniquet">Жгут наложен</label>
+            </div>
+
+            <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="anesthesia" name="anesthesia">
+            <label class="form-check-label" for="anesthesia">Введен промедол</label>
+            </div>
+
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="allergy" name="allergy">
+                <label class="form-check-label" for="allergy">Аллергия</label>
+            </div>
+
+            <div class="col-12">
+              <label for="note" class="form-label">Примечание</label>
+              <input type="text" class="form-control" id="note" name="note" placeholder="">
+              <small class="text-body-secondary">Время наложения жгута, аллерген, другая полезная информация о пациенте</small>
+            </div>
+
+            <hr class="my-4">
+
+            <h4 class="mb-3">Инфузионная терапия</h4>
+
+              <div class="col-12">
+              <label for="infuzion" class="form-label">Объем инфузий</label>
+              <input type="text" class="form-control" id="infuzion" name="infuzion" placeholder="Физ. раствор - 1000, Волювен - 500">
+              </div>
+
+              <div class="col-12">
+              <label for="shock" class="form-label">Обезболивание, предупреждение инфекции и противошоковая терапия</label>
+              <input type="text" class="form-control" id="shock" name="shock" placeholder="Дексаметазон - 24мг, Трамадол - 50мг, Цефтриаксон - 2.0, Транексамовая к.та - 1.0">
+              </div>
+          </div>
+
+          <div class="row g-3">
+             <hr class="my-4">
+             <h4 class="mb-3">Инструментальные исследования и клинические анализы</h4>
+
+              <div class="col-md-3">
+              <label for="blood" class="form-label">Группа крови</label>
+              <select class="form-select" id="blood" name="blood">
+                <option value="">Выберите...</option>
+                <option value="ab(I)">ab(I)</option>
+                <option value="Ab(II)">Ab(II)</option>
+                <option value="aB(III)">aB(III)</option>
+                <option value="AB(IV)">AB(IV)</option>
+              </select>
+              </div>
+
+              <div class="col-md-3">
+              <label for="bloodRh" class="form-label">Резус фактор</label>
+              <select class="form-select" id="bloodRh" name="bloodRh">
+                <option value="">Выберите...</option>
+                <option>Rh+</option>
+                <option>Rh-</option>
+              </select>
+              </div>
+          </div>
+            <div class="col-md-6">
+              <label for="ultrasound" class="form-label">e-FAST</label>
+              <input type="text" class="form-control" id="ultrasound" name="ultrasound" placeholder="">
+            </div>
+
+            <div class="col-md-6">
+              <label for="xRay" class="form-label">Рентгенография</label>
+              <input type="text" class="form-control" id="xRay" name="xRay" placeholder="">
+            </div>
+
+          <hr class="my-4">
+
+          <h4 class="mb-3">Решение на эвакуацию</h4>
+
+            <div class="my-3">
+            <div class="form-check">
+              <input id="evacuation" name="sorting" type="radio" class="form-check-input" value="evacuation" checked required>
+              <label class="form-check-label" for="evacuation">На следующий этап</label>
+            </div>
+            <div class="form-check">
+              <input id="hospital" name="sorting" type="radio" class="form-check-input" value="hospital" required>
+              <label class="form-check-label" for="hospital">Госпитализация</label>
+            </div>
+            <div class="form-check">
+              <input id="treatment" name="sorting" type="radio" class="form-check-input" value="treatment" required>
+              <label class="form-check-label" for="treatment">Амбулаторное леччение</label>
+            </div>
+            </div>
+
+          <hr class="my-4">
+
+          <button class="w-100 btn btn-primary btn-lg" type="submit">Сгенерировать QRcode</button>
+        </form>
+    </div>
+  </main>
+
+  <footer class="my-5 pt-5 text-body-secondary text-center text-small">
+    <p class="mb-1">&copy; 2017–2023 Company Name</p>
+    <ul class="list-inline">
+      <li class="list-inline-item"><a href="#">Privacy</a></li>
+      <li class="list-inline-item"><a href="#">Terms</a></li>
+      <li class="list-inline-item"><a href="#">Support</a></li>
+    </ul>
+  </footer>
+ </div>
+
+
+{% endblock %}
